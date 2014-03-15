@@ -1,0 +1,192 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#9fc8e3" >
+
+        <TableRow style="@style/rowStyle" >
+
+            <TextView
+                android:id="@+id/tv00"
+                style="@style/cellStyle"
+                android:text="00"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv01"
+                style="@style/cellStyle"
+                android:text="01"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv02"
+                style="@style/cellStyle"
+                android:text="02"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv03"
+                style="@style/cellStyle"
+                android:text="03"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+
+        <TableRow style="@style/rowStyle" >
+
+            <TextView
+                android:id="@+id/tv10"
+                style="@style/cellStyle"
+                android:text="10"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv11"
+                style="@style/cellStyle"
+                android:text="11"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv12"
+                style="@style/cellStyle"
+                android:text="12"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv13"
+                style="@style/cellStyle"
+                android:text="13"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+
+        <TableRow style="@style/rowStyle" >
+
+            <TextView
+                android:id="@+id/tv20"
+                style="@style/cellStyle"
+                android:text="20"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv21"
+                style="@style/cellStyle"
+                android:text="21"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv22"
+                style="@style/cellStyle"
+                android:text="22"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv23"
+                style="@style/cellStyle"
+                android:text="23"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+
+        <TableRow style="@style/rowStyle" >
+
+            <TextView
+                android:id="@+id/tv30"
+                style="@style/cellStyle"
+                android:text="30"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv31"
+                style="@style/cellStyle"
+                android:text="31"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv32"
+                style="@style/cellStyle"
+                android:text="32"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv33"
+                style="@style/cellStyle"
+                android:text="33"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/bDown"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/bUp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/down_button"/>
+
+        <Button
+            android:id="@+id/bLeft"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:layout_toLeftOf="@+id/bUp"
+            android:background="@drawable/left_button"/>
+
+        <Button
+            android:id="@+id/bRight"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignBaseline="@+id/bLeft"
+            android:layout_alignBottom="@+id/bLeft"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/bDown"
+            android:background="@drawable/right_button"/>
+
+        <Button
+            android:id="@+id/bUp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/bRight"
+            android:background="@drawable/up_button" />
+
+        <Button
+            android:id="@+id/bRestart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/restart_button" />
+
+    </RelativeLayout>
+
+</LinearLayout>
