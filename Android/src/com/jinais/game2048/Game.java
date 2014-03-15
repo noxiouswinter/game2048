@@ -96,15 +96,13 @@ public class Game {
 		}
 		
 		ArrayList<Integer> reverseProcessedList = new ArrayList<Integer>();
-		boolean processed = false;
 		for(int i= cleansedList.size()-1; i >= 0; i--) {
 			Integer nthElement = cleansedList.get(i);
 			Integer nMinusOnethElement = null;
-			if((!processed) && (i != 0) && nthElement.equals(nMinusOnethElement = cleansedList.get(i-1))) {
+			if((i != 0) && nthElement.equals(nMinusOnethElement = cleansedList.get(i-1))) {
 				reverseProcessedList.add(nthElement + nMinusOnethElement);
 				//Skip next(nMinusOneth) number
 				i--;
-				processed = true;
 			} else {
 				reverseProcessedList.add(nthElement);
 			}
