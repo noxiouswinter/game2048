@@ -313,4 +313,46 @@ public class Game {
 		return true; 
 	}
 	
+	public String getStringFromCachedMatrix() {
+		
+		Integer[][] matrix = this.cachedMatrix;
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i = 0; i < ROWS; i++){
+			if(i != 0){
+				sb.append(":");
+			}
+			for(int j = 0; j < COLUMNS; j++) {
+				if(j != 0){
+					sb.append(",");
+				}
+				sb.append(matrix[i][j]);
+			}
+		}
+		return sb.toString();
+	}
+	
+	public void setCachedMatrixFromString(String matrixString) {
+		
+		Integer[][] matrix = new Integer[ROWS][COLUMNS];
+		String[] rowsArray = matrixString.split(":");
+		for (int i = 0; i < rowsArray.length; i++) {
+			String columnString = rowsArray[i];
+			String[] columnsArray = columnString.split(",");
+			for (int j = 0; j < columnsArray.length; j++) {
+				matrix[i][j] = Integer.parseInt(columnsArray[j]);
+			}
+		}
+		
+		this.cachedMatrix = matrix;
+	}
+
+	public Integer[][] getMatrix() {
+		return cachedMatrix;
+	}
+
+	public void setMatrix(Integer[][] matrix) {
+		this.cachedMatrix = matrix;
+	}
+	
 }

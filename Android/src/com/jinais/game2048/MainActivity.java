@@ -36,7 +36,31 @@ public class MainActivity extends Activity implements OnClickListener{
 		game = new Game(gameStateCallback);
 	}
 	
-	
+	@Override
+	protected void onPause() {
+		//Persist matrix
+		SharedPreferences sharedPreferences = this.getSharedPreferences("com.jinais.game2048", Context.MODE_PRIVATE);
+		sharedPreferences.edit().putString("cachedMatrix", game.getStringFromCachedMatrix()).commit();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		
+		//Reload persisted matrix if any
+		SharedPreferences sharedPreferences = this.getSharedPreferences("com.jinais.game2048", Context.MODE_PRIVATE);
+		String matrixString = sharedPreferences.getString("cachedMatrix", "");
+		
+		if(!matrixString.equals("")){
+			game.setCachedMatrixFromString(matrixString);
+			updateMatrixView(game.getMatrix(), null);
+			
+		} else {
+			showWelcomeDialog();
+		}
+		super.onResume();
+	}
+
 	private void initializeViews() {
 		
 		tv00 = (TextView)findViewById(R.id.tv00);
@@ -164,8 +188,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
 	}
 	
-	
-	
 	private void showRestartDialog() {
 		
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -187,5 +209,26 @@ public class MainActivity extends Activity implements OnClickListener{
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
 	}
+	
+	private void showWelcomeDialog() {
+		
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+		 
+		alertDialogBuilder.setTitle("Welcome to Game2048!");
+		alertDialogBuilder
+			.setMessage("Use the arrows to move the numbers. Adjacent identical numbers " +
+					"in the direction of the move will add up. The game is over when no more" +
+					" moves are possible. You win the game if you create a 2048 tile!")
+			.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					MainActivity.this.game.resetGame();
+				}
+			  });
+		
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
+	}
+	
+	
 
 }
