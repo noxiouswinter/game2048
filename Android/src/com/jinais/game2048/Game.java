@@ -59,7 +59,7 @@ public class Game {
 		}
 	}
 	
-	private boolean addTile(Integer[][] matrix, int value) {
+	private TilePosition addTile(Integer[][] matrix, int value) {
 		
 		//Find empty slots
 		List<TilePosition> emptyCells = new ArrayList<TilePosition>();
@@ -73,7 +73,7 @@ public class Game {
 		
 		//Game over
 		if(emptyCells.size() == 0) {
-			return false;
+			return null;
 		}
 		
 		//Assign value at random empty slot
@@ -81,7 +81,7 @@ public class Game {
 		int randomNumber = random.nextInt(emptyCells.size());
 		TilePosition randomPosition = emptyCells.get(randomNumber);
 		matrix[randomPosition.i][randomPosition.j] = value;
-		return true;
+		return randomPosition;
 	}
 	
 	// [0, 0, 1, 2, 2, 0, 3, 3, 0] to [1, 2, 2, 6] 
@@ -116,7 +116,7 @@ public class Game {
 		return processedList;
 	}
 	
-	private static class TilePosition {
+	public static class TilePosition {
 		public TilePosition(int i, int j){
 			this.i = i;
 			this.j = j;
@@ -229,7 +229,8 @@ public class Game {
 		}
 		
 		//Add tile and see if gameOver
-		if(!addTile(matrix, getRandomPopUpInt())) {
+		TilePosition tilePositionAdded;
+		if((tilePositionAdded = addTile(matrix, getRandomPopUpInt())) == null) {
 			
 			if(checkIfGameOver()) {
 				gameStateCallback.OnGameOver();
@@ -237,7 +238,7 @@ public class Game {
 			return false;
 			
 		} else {
-			gameStateCallback.OnMatrixUpdated(matrix);
+			gameStateCallback.OnMatrixUpdated(matrix, tilePositionAdded);
 			return true;
 		}
 	}
@@ -248,14 +249,14 @@ public class Game {
 		initializeMatrix(matrix);
 		
 		//Put two random numbers in the matrix initially
-		if(!addTile(matrix, getRandomPopUpInt())){
+		if(addTile(matrix, getRandomPopUpInt()) == null){
 			Log.e("ERROR", "Couldn't add tile");
 		}
-		if(!addTile(matrix, getRandomPopUpInt())){
+		if(addTile(matrix, getRandomPopUpInt()) == null){
 			Log.e("ERROR", "Couldn't add tile");
 		}
 		
-		gameStateCallback.OnMatrixUpdated(matrix);
+		gameStateCallback.OnMatrixUpdated(matrix, null);
 	}
 
 	//Check if moves are possible by checking identical numbers in the neighborhood of each cell

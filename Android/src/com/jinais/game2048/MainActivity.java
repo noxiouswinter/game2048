@@ -1,15 +1,20 @@
 package com.jinais.game2048;
 
 import com.jinais.game2048.Game.Action;
+import com.jinais.game2048.Game.TilePosition;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +68,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		bRestart.setOnClickListener(this);
 	}
 	
-	public void updateMatrixView(Integer[][] matrix) {
+	public void updateMatrixView(Integer[][] matrix, TilePosition tilePositionAdded) {
 	    
 		tv00.setText(matrix[0][0].equals(0) ? "" : matrix[0][0].toString());
 		tv01.setText(matrix[0][1].equals(0) ? "" : matrix[0][1].toString());
@@ -81,6 +86,16 @@ public class MainActivity extends Activity implements OnClickListener{
 		tv31.setText(matrix[3][1].equals(0) ? "" : matrix[3][1].toString());
 		tv32.setText(matrix[3][2].equals(0) ? "" : matrix[3][2].toString());
 		tv33.setText(matrix[3][3].equals(0) ? "" : matrix[3][3].toString());
+		
+		
+		//Animate the added tile
+		if(tilePositionAdded != null) {
+			int id = getResources().getIdentifier("tv" + tilePositionAdded.i + tilePositionAdded.j, "id", this.getPackageName());
+			TextView addedTile = (TextView)findViewById(id);
+			
+			Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+			addedTile.startAnimation(animFadein);
+		}
 	}
 	
 	private class GameStateCallBackImpl implements GameStateCallback {
@@ -116,8 +131,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
 
 		@Override
-		public void OnMatrixUpdated(Integer[][] matrix) {
-			mainActivity.updateMatrixView(matrix);
+		public void OnMatrixUpdated(Integer[][] matrix, TilePosition tilePositionAdded) {
+			mainActivity.updateMatrixView(matrix, tilePositionAdded);
 		}
 		
 	}
