@@ -14,7 +14,7 @@ public class Game {
 	
 	private GameStateCallback gameStateCallback;
 	
-	private Integer matrix[][] = new Integer[ROWS][COLUMNS];
+	private Integer cachedMatrix[][] = new Integer[ROWS][COLUMNS];
 //	static Integer matrix[][] = {{2,4,5,6}, {2,4,5,6}, {2,4,5,6}, {2,4,5,6}};
 	
 	
@@ -124,7 +124,7 @@ public class Game {
 	}
 	
 	public Boolean playMatrix(Action action) {
-		return playMatrix(matrix, action);
+		return playMatrix(cachedMatrix, action);
 	}
 	
 	private Boolean playMatrix(Integer[][] matrix, Action action) {
@@ -244,17 +244,17 @@ public class Game {
 	public void resetGame() {
 		
 		//Fill with zeros
-		initializeMatrix(matrix);
+		initializeMatrix(cachedMatrix);
 		
 		//Put two random numbers in the matrix initially
-		if(addTile(matrix, getRandomPopUpInt()) == null){
+		if(addTile(cachedMatrix, getRandomPopUpInt()) == null){
 			Log.e("ERROR", "Couldn't add tile");
 		}
-		if(addTile(matrix, getRandomPopUpInt()) == null){
+		if(addTile(cachedMatrix, getRandomPopUpInt()) == null){
 			Log.e("ERROR", "Couldn't add tile");
 		}
 		
-		gameStateCallback.OnMatrixUpdated(matrix, null);
+		gameStateCallback.OnMatrixUpdated(cachedMatrix, null);
 	}
 
 	//Check if moves are possible by checking identical numbers in the neighborhood of each cell
@@ -263,7 +263,7 @@ public class Game {
 		for(int i= 0; i < ROWS; i++) {
 			for(int j=0; j < COLUMNS; j++) {
 				
-				Integer currentElement = matrix[i][j];
+				Integer currentElement = cachedMatrix[i][j];
 				
 				//If there is an empty cell
 				if(currentElement.equals(0)) {
@@ -280,28 +280,28 @@ public class Game {
 					//topTilePosition.i >= 0 && topTilePosition.i < ROWS && topTilePosition.j >=0 && topTilePosition.j < COLUMNS
 					
 					if(topTilePosition.i >= 0) {
-						Integer topElement = matrix[topTilePosition.i][topTilePosition.j];
+						Integer topElement = cachedMatrix[topTilePosition.i][topTilePosition.j];
 						if(topElement.equals(currentElement)) {
 							return false;
 						}
 					}
 					
 					if(bottomTilePosition.i < ROWS) {
-						Integer bottomElement = matrix[bottomTilePosition.i][bottomTilePosition.j];
+						Integer bottomElement = cachedMatrix[bottomTilePosition.i][bottomTilePosition.j];
 						if(bottomElement.equals(currentElement)) {
 							return false;
 						}
 					}
 					
 					if(leftTilePosition.j >= 0) {
-						Integer leftElement = matrix[leftTilePosition.i][leftTilePosition.j];
+						Integer leftElement = cachedMatrix[leftTilePosition.i][leftTilePosition.j];
 						if(leftElement.equals(currentElement)) {
 							return false;
 						}
 					}
 					
 					if(rightTilePosition.j < COLUMNS) {
-						Integer rightElement = matrix[rightTilePosition.i][rightTilePosition.j];
+						Integer rightElement = cachedMatrix[rightTilePosition.i][rightTilePosition.j];
 						if(rightElement.equals(currentElement)) {
 							return false;
 						}
