@@ -146,8 +146,9 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/bUp"
-            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"
+            
+            
             android:background="@drawable/down_button"/>
 
         <Button
