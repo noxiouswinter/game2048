@@ -12,15 +12,21 @@ public class MatrixMoveInfo {
     final public Integer[][] outputMatrix;
     final public int mergeScore;
     final public int potenttialMergeScore;
+    final public int misMatchCount;
+    final public int emptyCellCount;
 
-    public MatrixMoveInfo(Integer[][] matrix,int mergeScore,int potenttialMergeScore){
+    public MatrixMoveInfo(Integer[][] matrix,int mergeScore,int potenttialMergeScore,int misMatchCount,
+                          int emptyCellCount){
         this.outputMatrix = matrix;
         this.mergeScore = mergeScore;
         this.potenttialMergeScore = potenttialMergeScore;
+        this.misMatchCount = misMatchCount;
+        this.emptyCellCount = emptyCellCount;
     }
 
     @Override
     public String toString(){
-        return "{Merge Score" + mergeScore + ", Potential Merge Score " + potenttialMergeScore + "}";
+        return "{Empty Cell Count" + emptyCellCount + ", Potential Merge Score " + potenttialMergeScore +
+                " MisMatch Count " +misMatchCount + "}";
     }
 }

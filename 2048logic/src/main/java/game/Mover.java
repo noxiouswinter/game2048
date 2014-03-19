@@ -69,6 +69,66 @@ public class Mover {
 
     }
 
+    public static Integer getPotentialMergeCount(Integer[] arr){
+        Integer count = 0;
+        int i=1;
+        while(i<arr.length){
+            if(arr[i-1].intValue()==arr[i].intValue() && arr[i].intValue() !=0){
+                //adjacent pairs
+                count++;
+                i+=2;
+            }
+            else
+                i++;
 
 
+        }
+
+        return count;
+
+    }
+
+    public static Integer getOrderMisMatch(Integer[] arr){
+
+        Integer misMatchCount = 0;
+
+        Direction trend  = getDirection(arr[0],arr[1]);
+        if(trend== Direction.same){
+            trend = null;
+        }
+
+
+        for(int i=2;i<arr.length;i++){
+           Direction direction = getDirection(arr[i-1],arr[i]);
+           if(direction != Direction.same){
+
+            if(direction != trend && trend != null )
+                    misMatchCount++;
+            trend = direction;
+           }
+
+        }
+        return misMatchCount;
+    }
+
+    private static Direction getDirection(Integer first,Integer second) {
+        final Direction direction;
+
+        if(second.intValue()> first.intValue()){
+            direction = Direction.up;
+        }
+        else if(second.intValue()<first.intValue()){
+            direction = Direction.down;
+        }
+        else{
+            direction = Direction.same;
+        }
+        return direction;
+
+    }
+
+
+}
+enum Direction{
+    up,down,same
 }

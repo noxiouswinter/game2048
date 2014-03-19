@@ -29,27 +29,11 @@ public class SimpleStrategy implements GameStrategy{
                 }
 
         }
-        Comparator<MatrixMoveInfo> moveComparator = new Comparator<MatrixMoveInfo>(){
-
-            @Override
-            public int compare(MatrixMoveInfo o1, MatrixMoveInfo o2) {
-                if(o1.mergeScore+o1.potenttialMergeScore > o2.mergeScore+ o2.potenttialMergeScore)
-                    return 1;
-                else if(o1.mergeScore+o1.potenttialMergeScore < o2.mergeScore+ o2.potenttialMergeScore){
-                    return -1;
-                }
-                else{
-                    if(o1.mergeScore > o2.mergeScore)
-                        return 1;
-                    else if(o1.mergeScore < o2.mergeScore)
-                        return -1;
-                    else return 0;
-                }
-                //return 0;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        };
+        //Comparator<MatrixMoveInfo> moveComparator = new SimpleMoveComparator();
+        Comparator<MatrixMoveInfo> moveComparator = new OrderedWeightComparator();
         Collections.sort(moveInfoList,moveComparator);
         MatrixMoveInfo bestMove = moveInfoList.get(moveInfoList.size()-1);
+        //MatrixMoveInfo bestMove = moveInfoList.get(0);
         //System.out.println("Best Move " + bestMove);
         return bestMove;
     }

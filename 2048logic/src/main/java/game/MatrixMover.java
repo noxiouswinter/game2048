@@ -46,17 +46,41 @@ public class MatrixMover {
                 }
             }
         }
-       return new MatrixMoveInfo(copy,mergeScore,calculatePotentialMergeScore(copy));
+       return new MatrixMoveInfo(copy,mergeScore,calculatePotentialMergeScore(copy),
+               caclulateOrderMismatches(copy),calculateEmptyCells(copy));
+    }
+
+    public int calculateEmptyCells(Integer[][] matrix) {
+        int emptyCount = 0;
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[i].length;j++){
+                if(matrix[i][j].intValue()==0)
+                    emptyCount++;
+            }
+        }
+        return emptyCount;
+    }
+
+    public int caclulateOrderMismatches(Integer[][] matrix) {
+        int misMatchCount = 0;
+        for(int row=0;row<matrix.length;row++){
+            misMatchCount += Mover.getOrderMisMatch(matrix[row]);
+        }
+        for(int columnIdx=0;columnIdx<matrix[0].length;columnIdx++){
+            Integer[] column = extractColumn(matrix,columnIdx);
+            misMatchCount += Mover.getOrderMisMatch(column);
+        }
+        return misMatchCount;  //To change body of created methods use File | Settings | File Templates.
     }
 
     public int calculatePotentialMergeScore(Integer[][] aMatrix) {
         int pms = 0;
         for(int i=0;i<Game.ROWS;i++){
-          pms += Mover.getPotentialMergeScore(aMatrix[i]);
+          pms += Mover.getPotentialMergeCount(aMatrix[i]);
         }
         for(int i=0;i<Game.COLUMNS;i++){
             Integer[] column = extractColumn(aMatrix,i);
-            pms += Mover.getPotentialMergeScore(column);
+            pms += Mover.getPotentialMergeCount(column);
         }
         return pms;
     }

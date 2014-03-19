@@ -27,7 +27,7 @@ public class Main {
             MatrixMoveInfo moveInfo = strategy.bestMove(game.getMatrix());
             game.setMatrix(moveInfo.outputMatrix);
             moveCount++;
-            if(moveCount%100==0){
+            if(moveCount%1000==0){
                 System.out.println("Completed " + moveCount + " Moves");
                 printMatrix(moveInfo.outputMatrix);
             }
@@ -35,10 +35,13 @@ public class Main {
         }
         if(game.isGameOver()){
             printMatrix(game.getMatrix());
+            System.out.println("# of moves" + moveCount);
             System.out.println("Lost! Game Ended");
         }
         if(game.isGameWon()){
+            System.out.println("# of moves" + moveCount);
             System.out.println("Jesus is my lord and savior");
+            printMatrix(game.getMatrix());
         }
 
     }
