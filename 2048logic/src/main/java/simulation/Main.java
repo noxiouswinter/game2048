@@ -42,7 +42,8 @@ public class Main {
         }
         if(game.isGameWon()){
             System.out.println("# of moves" + moveCount);
-            System.out.println("Jesus is my lord and savior");
+            System.out.println("Won!");
+            System.out.println("Won!");
             printMatrix(game.getMatrix());
         }
 
