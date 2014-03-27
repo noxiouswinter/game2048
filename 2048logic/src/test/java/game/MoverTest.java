@@ -1,6 +1,6 @@
 package game;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertThat;
@@ -18,12 +18,18 @@ public class MoverTest {
     public void testMisMatchScore(){
           Integer[] arr = {3,5,6,1};
           int result = Mover.getOrderMisMatchValue(arr);
-        Assert.assertEquals(8,result);
+        Assert.assertEquals(5,result);
     }
     @Test
     public void testMisMatchScore1(){
         Integer[] arr = {0,5,0,0};
         int result = Mover.getOrderMisMatchValue(arr);
-        Assert.assertEquals(0,result);
+        Assert.assertEquals(5,result);
+    }
+
+    @Test
+    public void testMismatchScore2(){
+        Integer[] arr = {0,2,4,10};
+        Assert.assertEquals(0,Mover.getOrderMisMatchValue(arr).intValue());
     }
 }

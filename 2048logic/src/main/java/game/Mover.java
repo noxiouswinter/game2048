@@ -113,7 +113,7 @@ public class Mover {
         Integer misMatchValue = 0;
 
 
-        Pair<Direction,Integer> movement = Pair.of(getDirection(arr[0],arr[1]),arr[0].intValue()-arr[i].intValue());
+        Pair<Direction,Integer> movement = Pair.of(getDirection(arr[0],arr[1]),arr[1].intValue()-arr[0].intValue());
 
 
 
@@ -124,14 +124,14 @@ public class Mover {
                 if(direction != movement.getLeft() && movement.getLeft() !=  Direction.same){
 
                     int delta =  Math.abs(arr[i]-arr[i-1]);
-
+                    misMatchValue = Math.max(delta,movement.getRight());
                 }
-                    misMatchValue = Math.max();
-                trend = direction;
+
+                movement = Pair.of(direction,arr[i].intValue()-arr[i-1].intValue());
             }
 
         }
-        return misMatchCount;
+        return misMatchValue;
     }
 
     public static Integer getOrderMisMatch(Integer[] arr){
