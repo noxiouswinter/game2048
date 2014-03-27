@@ -3,6 +3,8 @@ package game;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import strategy.BasicScoreStrategy;
+import strategy.ScoreStrategy;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,8 +64,8 @@ public class MatrixMoverTests {
 
     @Test
     public void testPotentialMerge(){
-        MatrixMover matrixMover = new MatrixMover();
-         Assert.assertEquals(4,matrixMover.calculatePotentialMergeScore(matrix));
+        ScoreStrategy scoreStrategy = new BasicScoreStrategy();
+         Assert.assertEquals(4,scoreStrategy.getSmoothnessScore(matrix).intValue());
     }
 
     @Test

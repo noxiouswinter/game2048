@@ -1,5 +1,8 @@
 package game;
 
+import strategy.BasicScoreStrategy;
+import strategy.ScoreStrategy;
+
 /**
  * Created with IntelliJ IDEA.
  * User: skunnumkal
@@ -8,6 +11,8 @@ package game;
  * To change this template use File | Settings | File Templates.
  */
 public class MatrixMover {
+
+    private ScoreStrategy scoreStrategy = new BasicScoreStrategy();
 
     public MatrixMoveInfo moveMatrix(Integer[][] matrix, Game.Action action){
         int mergeScore = 0;
@@ -46,46 +51,13 @@ public class MatrixMover {
                 }
             }
         }
-       return new MatrixMoveInfo(copy,mergeScore,calculatePotentialMergeScore(copy),
-               caclulateOrderMismatches(copy),calculateEmptyCells(copy));
+       return new MatrixMoveInfo(copy,mergeScore,scoreStrategy.getSmoothnessScore(copy),
+               scoreStrategy.getMisMatchScore(copy),scoreStrategy.getEmptyCellScore(copy));
     }
 
-    public int calculateEmptyCells(Integer[][] matrix) {
-        int emptyCount = 0;
-        for(int i=0;i<matrix.length;i++){
-            for(int j=0;j<matrix[i].length;j++){
-                if(matrix[i][j].intValue()==0)
-                    emptyCount++;
-            }
-        }
-        return emptyCount;
-    }
 
-    public int caclulateOrderMismatches(Integer[][] matrix) {
-        int misMatchCount = 0;
-        for(int row=0;row<matrix.length;row++){
-            misMatchCount += Mover.getOrderMisMatch(matrix[row]);
-        }
-        for(int columnIdx=0;columnIdx<matrix[0].length;columnIdx++){
-            Integer[] column = extractColumn(matrix,columnIdx);
-            misMatchCount += Mover.getOrderMisMatch(column);
-        }
-        return misMatchCount;  //To change body of created methods use File | Settings | File Templates.
-    }
 
-    public int calculatePotentialMergeScore(Integer[][] aMatrix) {
-        int pms = 0;
-        for(int i=0;i<Game.ROWS;i++){
-          pms += Mover.getPotentialMergeCount(aMatrix[i]);
-        }
-        for(int i=0;i<Game.COLUMNS;i++){
-            Integer[] column = extractColumn(aMatrix,i);
-            pms += Mover.getPotentialMergeCount(column);
-        }
-        return pms;
-    }
-
-    protected Integer[] extractColumn(Integer[][] copy, int colIdx) {
+    public static Integer[] extractColumn(Integer[][] copy, int colIdx) {
         Integer[] column = new Integer[Game.ROWS];
         for(int row=0;row<column.length;row++){
             column[row] = copy[row][colIdx];

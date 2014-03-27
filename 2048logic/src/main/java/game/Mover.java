@@ -1,5 +1,7 @@
 package game;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 /**
  * Created with IntelliJ IDEA.
  * User: skunnumkal
@@ -86,6 +88,50 @@ public class Mover {
 
         return count;
 
+    }
+    public static Integer getPotentialMergeValue(Integer[] arr){
+        Integer value = 0;
+        int i=1;
+        while(i<arr.length){
+            if(arr[i-1].intValue()==arr[i].intValue() && arr[i].intValue() !=0){
+                //adjacent pairs
+                value += arr[i].intValue();
+                i+=2;
+            }
+            else
+                i++;
+
+
+        }
+
+        return value;
+
+    }
+
+    public static Integer getOrderMisMatchValue(Integer[] arr){
+
+        Integer misMatchValue = 0;
+
+
+        Pair<Direction,Integer> movement = Pair.of(getDirection(arr[0],arr[1]),arr[0].intValue()-arr[i].intValue());
+
+
+
+        for(int i=2;i<arr.length;i++){
+            Direction direction = getDirection(arr[i-1],arr[i]);
+            if(direction != Direction.same){
+
+                if(direction != movement.getLeft() && movement.getLeft() !=  Direction.same){
+
+                    int delta =  Math.abs(arr[i]-arr[i-1]);
+
+                }
+                    misMatchValue = Math.max();
+                trend = direction;
+            }
+
+        }
+        return misMatchCount;
     }
 
     public static Integer getOrderMisMatch(Integer[] arr){

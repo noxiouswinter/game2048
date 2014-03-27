@@ -1,5 +1,8 @@
 package game;
 
+import strategy.BasicScoreStrategy;
+import strategy.ScoreStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,10 +37,11 @@ public class MyGame {
     }
 
     MatrixMover aMover = new MatrixMover();
+    ScoreStrategy strategy = new BasicScoreStrategy();
 
     public boolean isGameOver(){
         return getEmptyTilePositions().size()==0 &&
-        aMover.calculatePotentialMergeScore(matrix)==0;
+        strategy.getSmoothnessScore(matrix)==0;
     }
 
     public boolean isGameWon(){
