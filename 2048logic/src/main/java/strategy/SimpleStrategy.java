@@ -29,11 +29,9 @@ public class SimpleStrategy implements GameStrategy{
                 }
 
         }
-        //Comparator<MatrixMoveInfo> moveComparator = new SimpleMoveComparator();
         Comparator<MatrixMoveInfo> moveComparator = new OrderedWeightComparator();
         Collections.sort(moveInfoList,moveComparator);
         MatrixMoveInfo bestMove = moveInfoList.get(moveInfoList.size()-1);
-        //MatrixMoveInfo bestMove = moveInfoList.get(0);
         //System.out.println("Best Move " + bestMove);
         return bestMove;
     }

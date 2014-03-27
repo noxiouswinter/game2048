@@ -12,9 +12,10 @@ import java.util.Comparator;
  * To change this template use File | Settings | File Templates.
  */
 public class OrderedWeightComparator implements Comparator<MatrixMoveInfo> {
-    double pmcWeight = 0.1;
-    double mismatchWeight = 1.0;
-    double emptyCellWeight = 2.7;
+    double pmcWeight = 1;
+    double mismatchWeight = 1;
+    double emptyCellWeight = 13;
+    double maxValWeight = 9;
 
     /**
      * var smoothWeight = 0.1,
@@ -43,10 +44,10 @@ public class OrderedWeightComparator implements Comparator<MatrixMoveInfo> {
 
         double o1TotalScore = pmcWeight*o1.potenttialMergeScore+
                 emptyCellWeight*o1.emptyCellCount -
-                mismatchWeight*o1.misMatchCount;
+                mismatchWeight*o1.misMatchCount + o1.maxValueScore*maxValWeight;
         double o2TotalScore = pmcWeight*o2.potenttialMergeScore+
                 emptyCellWeight*o2.emptyCellCount -
-                mismatchWeight*o2.misMatchCount;
+                mismatchWeight*o2.misMatchCount + o2.maxValueScore*maxValWeight;
 
         if(o1TotalScore > o2TotalScore)
             return 1;

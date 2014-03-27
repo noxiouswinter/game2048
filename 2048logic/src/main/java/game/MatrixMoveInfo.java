@@ -14,6 +14,7 @@ public class MatrixMoveInfo {
     final public int potenttialMergeScore;
     final public int misMatchCount;
     final public int emptyCellCount;
+    final public int maxValueScore;
 
     public MatrixMoveInfo(Integer[][] matrix,int mergeScore,int potenttialMergeScore,int misMatchCount,
                           int emptyCellCount){
@@ -22,6 +23,17 @@ public class MatrixMoveInfo {
         this.potenttialMergeScore = potenttialMergeScore;
         this.misMatchCount = misMatchCount;
         this.emptyCellCount = emptyCellCount;
+        this.maxValueScore = 0;
+    }
+
+    public MatrixMoveInfo(Integer[][] matrix,int mergeScore,int potenttialMergeScore,int misMatchCount,
+                          int emptyCellCount,int maxValueScore){
+        this.outputMatrix = matrix;
+        this.mergeScore = mergeScore;
+        this.potenttialMergeScore = potenttialMergeScore;
+        this.misMatchCount = misMatchCount;
+        this.emptyCellCount = emptyCellCount;
+        this.maxValueScore = maxValueScore;
     }
 
     @Override

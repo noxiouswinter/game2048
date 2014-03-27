@@ -174,6 +174,26 @@ public class Mover {
     }
 
 
+    public static int getOrderMisMatchDiff(Integer[] arr) {
+        int diff = 0;
+
+        int prevDelta = arr[1].intValue() - arr[0].intValue();
+
+
+
+        for(int i=2;i<arr.length;i++){
+            int curDelta = arr[i].intValue() - arr[i-1].intValue();
+            if(curDelta != 0){
+
+                if(curDelta*prevDelta < 0  )
+                    diff += Math.max(Math.abs(curDelta),Math.abs(prevDelta));
+                prevDelta = curDelta;
+            }
+
+        }
+
+        return diff;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
 enum Direction{
     up,down,same

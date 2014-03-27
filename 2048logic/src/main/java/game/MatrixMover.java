@@ -1,6 +1,9 @@
 package game;
 
+import ml.Doer;
+import strategy.AStrategy;
 import strategy.BasicScoreStrategy;
+import strategy.LogScoreStrategy;
 import strategy.ScoreStrategy;
 
 /**
@@ -12,7 +15,8 @@ import strategy.ScoreStrategy;
  */
 public class MatrixMover {
 
-    private ScoreStrategy scoreStrategy = new BasicScoreStrategy();
+    //private ScoreStrategy scoreStrategy = new BasicScoreStrategy();
+    private ScoreStrategy scoreStrategy = new AStrategy();
 
     public MatrixMoveInfo moveMatrix(Integer[][] matrix, Game.Action action){
         int mergeScore = 0;
@@ -51,8 +55,9 @@ public class MatrixMover {
                 }
             }
         }
-       return new MatrixMoveInfo(copy,mergeScore,scoreStrategy.getSmoothnessScore(copy),
-               scoreStrategy.getMisMatchScore(copy),scoreStrategy.getEmptyCellScore(copy));
+       return new MatrixMoveInfo(copy,mergeScore,scoreStrategy.getSmoothnessScore(Doer.getLog(copy)),
+               scoreStrategy.getMisMatchScore(Doer.getLog(copy)),scoreStrategy.getEmptyCellScore(Doer.getLog(copy)),
+               scoreStrategy.getMaxValueScore(Doer.getLog(copy)));
     }
 
 

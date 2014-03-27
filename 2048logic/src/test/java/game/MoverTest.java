@@ -32,4 +32,21 @@ public class MoverTest {
         Integer[] arr = {0,2,4,10};
         Assert.assertEquals(0,Mover.getOrderMisMatchValue(arr).intValue());
     }
+
+    @Test
+    public void testDiff1(){
+        Integer[] arr = {0,2,4,10};
+        Assert.assertEquals(0,Mover.getOrderMisMatchDiff(arr));
+    }
+
+    @Test
+    public void testDiff2(){
+        Integer[] arr = {0,2,4,1};
+        Assert.assertEquals(3,Mover.getOrderMisMatchDiff(arr));
+    }
+    @Test
+    public void testDiff3(){
+        Integer[] arr = {1,7,1,5};
+        Assert.assertEquals(12,Mover.getOrderMisMatchDiff(arr));
+    }
 }

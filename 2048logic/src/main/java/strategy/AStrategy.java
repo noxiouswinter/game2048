@@ -3,50 +3,54 @@ package strategy;
 import game.Game;
 import game.MatrixMover;
 import game.Mover;
-import ml.Doer;
 
 /**
  * Created with IntelliJ IDEA.
- * User: sajit
- * Date: 3/25/14
- * Time: 9:30 PM
+ * User: skunnumkal
+ * Date: 3/27/14
+ * Time: 8:55 AM
  * To change this template use File | Settings | File Templates.
  */
-public class LogScoreStrategy implements ScoreStrategy {
+public class AStrategy implements ScoreStrategy {
     @Override
     public Integer getMisMatchScore(Integer[][] matrix) {
         int misMatchScore = 0;
-        Integer[][] logMath = Doer.getLog(matrix);
+
         for(int row=0;row<Game.ROWS;row++){
-            misMatchScore += Mover.getOrderMisMatchValue(logMath[row]);
+            misMatchScore += Mover.getOrderMisMatchDiff(matrix[row]);
         }
         for(int columnIdx=0;columnIdx<Game.COLUMNS;columnIdx++){
-            Integer[] column = MatrixMover.extractColumn(logMath, columnIdx);
-            misMatchScore += Mover.getOrderMisMatchValue(column);
+            Integer[] column = MatrixMover.extractColumn(matrix, columnIdx);
+            misMatchScore += Mover.getOrderMisMatchDiff(column);
         }
         return misMatchScore;
+
     }
 
     @Override
     public Integer getSmoothnessScore(Integer[][] matrix) {
-        Integer[][] logMath = Doer.getLog(matrix);
+
         int pms = 0;
         for(int i=0;i< Game.ROWS;i++){
-            pms += Mover.getPotentialMergeValue(logMath[i]);
+            pms += Mover.getPotentialMergeValue(matrix[i]);
         }
         for(int i=0;i<Game.COLUMNS;i++){
-            Integer[] column = MatrixMover.extractColumn(logMath, i);
+            Integer[] column = MatrixMover.extractColumn(matrix, i);
             pms += Mover.getPotentialMergeValue(column);
         }
         return pms;
-        //return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-
+           }
 
     @Override
     public Integer getMaxValueScore(Integer[][] matrix) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        int max = 0;
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[i].length;j++)
+                if(matrix[i][j].intValue()> max){
+                    max = matrix[i][j];
+                }
+        }
+        return max;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -58,6 +62,7 @@ public class LogScoreStrategy implements ScoreStrategy {
                     emptyCount++;
             }
         }
-        return emptyCount; //To change body of implemented methods use File | Settings | File Templates.
+        return emptyCount;
+
     }
 }

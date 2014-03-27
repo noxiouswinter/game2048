@@ -21,11 +21,13 @@ public class Main {
         Game x = new Game();
         game.initializeMatrix();
         int moveCount = 0;
-        while(!game.isGameOver() && !game.isGameWon()){
+        while(!game.isGameOver() && !game.isGameWon() && moveCount < 90000){
             boolean result = game.addTile(x.getRandomPopUpInt());
             //printMatrix(game.getMatrix());
             MatrixMoveInfo moveInfo = strategy.bestMove(game.getMatrix());
             game.setMatrix(moveInfo.outputMatrix);
+            //System.out.println("================");
+            //printMatrix(moveInfo.outputMatrix);
             moveCount++;
             if(moveCount%1000==0){
                 System.out.println("Completed " + moveCount + " Moves");
@@ -49,7 +51,7 @@ public class Main {
     private static void printMatrix(Integer[][] outputMatrix) {
         for(int i=0;i<outputMatrix.length;i++){
             for(int j=0;j<outputMatrix[i].length;j++){
-                System.out.print(" " + outputMatrix[i][j]);
+                System.out.print("   " + outputMatrix[i][j]);
             }
            System.out.println();
         }
